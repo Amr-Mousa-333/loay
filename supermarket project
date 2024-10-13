@@ -1,0 +1,521 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+void User();
+void Manager();
+void Show_menu();
+int menu_size = 20;
+void Buy_product();
+void Creat();
+void Log_in();
+void M_doing(string name);
+void Add();
+void Edit();
+void Remove();
+string nphone;
+string USERNAME="loay";
+string PASSWORD="1111";
+
+string trim(const string& str)
+{
+    size_t first = str.find_first_not_of(' ');
+    if (first == string::npos) return "";
+    size_t last = str.find_last_not_of(' ');
+    return str.substr(first, (last - first + 1));
+}
+
+string Product[30] = {"Milk","Chocolate","Biscuits",
+                      "Juice","Olive Oil","Pasta",
+                      "Rice","Sauce","Cheese",
+                      "Yogurt","Tea","Honey",
+                      "Soup","Jam","Bread",
+                      "Coffee","Popcorn","Butter",
+                      "Chips","Soap"};
+
+float Price[30] ={10,15,20,25,30,
+                35,40,45,50,55,
+                60,65,70,75,80,
+                90,85,95,100,110};
+
+void User()
+{
+    int U_choose;
+    string U_name;
+
+    cout << "\nPlease enter your name: ";
+    cin.ignore();//chat   للتخلص من الرموز
+    getline(cin, U_name);
+    cout << "\nWelcome " << U_name << ", How are you..\n";
+    do {
+        cout << "Choose how I can help you?"
+                "\n1- Show the menu:"
+                "\n2- Buy a product:"
+                "\n3- Return to the previous list:\n...";
+        cin >> U_choose;
+        cout<<"\n";
+
+        switch (U_choose) {
+            case 1:
+                Show_menu();
+                break;
+            case 2:
+                Buy_product();
+                break;
+            case 3:
+                cout << "Exiting User menu...\n";
+                break;
+            default:
+                cout << "\nPlease choose 1 or 2 or 3\n\n";
+        }
+    } while (U_choose != 3);
+}
+
+void Show_menu()
+{
+
+    for(int i = 0; i < menu_size; i++)
+    {
+        cout << i + 1 << "- " << Product[i] << "\t" << Price[i] << " $\n";
+    }
+
+    cout << "\n";
+}
+
+void Buy_product()
+{
+
+    int ProductsCart[30];
+    int num;
+    int choose_product;
+    int Total = 0;
+    char x;
+    Show_menu();
+
+    do
+    {
+
+        cout << "Choose what you want to do?"
+                "\n1- Add a product:"
+                "\n2- Return to the previous list:\n...";
+
+        cin >> choose_product;
+        if (choose_product == 1)
+        {
+            cout << "Please enter the number of products you will buy:\n...";
+            cin >> num;
+            cout << "Enter the product number you want to buy from the menu:\n";
+
+            for (int k = 0; k < num; k++)
+            {
+                cout << "...";
+                cin >> ProductsCart[k];
+            }
+
+            cout<<"To confirm the order, enter the phone number:\n...";
+            phone:
+            cin>>nphone;
+            if (nphone.size() == 11)
+            {
+                cout << "\nThe order has been confirmed!\n";
+                cout << "Do you want to view the receipt? (y/n)\n...";
+                cin >> x;
+                cout << "\n";
+            }
+
+            else
+
+            {
+                cout << "\nError:\nPlease Enter a 11-digit number:\n...";
+                goto phone;
+            }
+
+            if (x == 'y')
+            {
+                cout << "OK, your receipt is:\n";
+                for (int l = 0; l < num; l++) {
+                    cout << l + 1 << "- " << Product[ProductsCart[l] - 1] << "\t" << Price[ProductsCart[l] - 1] << " $\n";
+                    Total += Price[ProductsCart[l] - 1];
+                }
+                cout << "\nTotal of price is= " << Total << " $\n\n";
+                cout << "Thank you for using our service.\nWe are honored to have you.\n\n";
+            }
+
+            else
+            {
+                for (int l = 0; l < num; l++) {
+                    Total += Price[ProductsCart[l] - 1];
+                }
+                cout << "Total of price is= " << Total << " $\n\n";
+                cout << "\nThank you for using our service.\nWe are honored to have you.\n\n";
+
+            }
+
+        }
+
+    }
+    while (choose_product != 2);
+}
+
+int main()
+{
+
+    cout << "---------WELCOME TO IN OUR SUPERMARKET---------" << endl;
+    cout << "-----------------ENTER TO OPEN-----------------" << endl;
+    getchar();
+    int choose;
+
+    do
+    {
+        cout << "Choose what you do:"
+                "\n1- User:"
+                "\n2- Manager:"
+                "\n3- Exit the program:\n...";
+        cin >> choose;
+
+        switch (choose)
+        {
+            case 1:
+                User();
+                break;
+            case 2:
+                Manager();
+                break;
+            case 3:
+                cout << "\nThe program has been locked..";
+                break;
+            default:
+                cout << "Please choose 1, 2, or 3\n\n";
+
+        }
+
+    }
+    while (choose != 3);
+
+    return 0;
+}
+
+void Manager()
+{
+
+    int M_choose;
+
+    do {
+
+        cout << "\nChoose how I can help you?"
+                "\n1- Log in:"
+                "\n2- Creat Email:"
+                "\n3- Return to the previous list:\n...";
+
+        cin >> M_choose;
+        cout<<"\n";
+
+        switch (M_choose) {
+            case 1:
+                Log_in();
+                break;
+            case 2:
+                Creat();
+                break;
+            case 3:
+                cout << "Exiting User menu...\n";
+                break;
+            default:
+                cout << "\nPlease choose 1 or 2 or 3\n\n";
+        }
+
+    }
+    while (M_choose != 3);
+
+}
+
+void Creat() {
+    string M_name;
+    string M_pass;
+    string M_cpass;
+    string M_rname;
+    string M_rpass;
+    string displayedText = "WERasdWER";
+    string userInput;
+
+    cout << "Please verify that you are not a robot!\n";
+    cout << displayedText << "\n";
+    cout << "Rewrite this sentence:\n...";
+
+
+    while (true)
+    {
+        cin.ignore();
+        getline(cin, userInput);
+
+        if (userInput == displayedText)
+        {
+            cout << "\nVerified, thank you for confirming that you are not a robot.\n";
+            break;
+
+        }
+    }
+
+    cout << "Enter your name: ";
+    getline(cin, M_name);
+
+    cout << "Enter your Password: ";
+    getline(cin, M_pass);
+
+    cout << "Confirm Password: ";
+    getline(cin, M_cpass);
+
+    if(trim(M_pass) == trim(M_cpass))
+    {
+        cout << "\nTO LOGIN..\n";
+
+        while (true)
+        {
+            cout << "Enter your name: ";
+            getline(cin, M_rname);
+
+            cout << "Enter your Password: ";
+            getline(cin, M_rpass);
+            cout << "\n\n";
+
+            if (trim(M_pass) == trim(M_rpass) && trim(M_rname) == trim(M_name))
+            {
+                M_doing(M_name);
+                break;
+            }
+
+            else
+            {
+                cout << "Error: name or password is incorrect..!\n\n";
+            }
+        }
+    }
+
+    else
+    {
+        cout << "Error: your password is incorrect..!\nPlease try again\n\n";
+        Creat();
+    }
+}
+
+void Log_in()
+{
+
+    cout << "Enter your name:";
+    string cname;
+    cin >> cname;
+    cout << "Enter your password:";
+    string cpass;
+    cin >> cpass;
+    cout<<"\n\n";
+
+    if (cname == USERNAME && cpass == PASSWORD)
+    {
+        M_doing(USERNAME);
+    }
+
+    else
+    {
+
+        cout<<"Erorr name or password is incorrect..!\nPlease try again..\n\n";
+        Log_in();
+
+    }
+
+}
+
+void M_doing(string name)
+{
+
+    cout << "-----Welcome back " << name << "-----";
+    int Mchoose;
+
+    do {
+
+        cout << "\nChoose process: "
+             << "\n1- Add A Product to the menu:"
+             << "\n2- Edit AN Product to the menu:"
+             << "\n3- Remove A Product to the menu:"
+             << "\n4- Return Back:\n...";
+        cin >> Mchoose;
+        cout<<"\n";
+
+        switch (Mchoose)
+        {
+            case 1:
+                Add();
+                break;
+            case 2:
+                Edit();
+                break;
+            case 3:
+                Remove();
+                break;
+            case 4:
+                cout << "Exiting User menu...\n";
+                break;
+            default:
+                cout << "\nPlease choose 1 / 2 / 3 or 4\n\n";
+
+        }
+
+    }
+    while (Mchoose != 4);
+
+}
+
+void Add()
+{
+
+    cout<<"How many product would you like to add?\n..";
+    int ppp;
+    cin>>ppp;
+    menu_size+=ppp;
+
+    for(int i = 0; i < menu_size-20; i++)
+    {
+        cout<<"\nEnter the new name about product:";
+        cin>>Product[i+20];
+        cout<<"Enter the new price about product:";
+        cin>>Price[i+20];
+        cout<<"\n";
+    }
+
+    cout<<"Do you want to see the menu after editing?y/o";
+    char c;
+    cin>>c;
+
+    if(c=='y')
+    {
+        Show_menu();
+    }
+
+}
+
+void Edit()
+{
+
+    int numproduct;
+    int numberpro;
+    string newname;
+    int newprice;
+    cout<<"How many products would you Edit?\n...";
+    cin>>numproduct;
+    cout<<"\nChoose:\n\n";
+    Show_menu();
+    for(int p=0;p<numproduct;p++)
+    {
+        cout<<"Number about product:";
+        cin>>numberpro;
+
+        cout<<"Do you want to change the Name or Price?n/p\n...";
+        char edit;
+        cin>>edit;
+
+        if(edit=='n')
+        {
+            cout<<"Enter the new Name:\n...";
+            cin>>newname;
+            Product[numberpro-1]=newname;
+        }
+
+        else if(edit=='p')
+        {
+            cout<<"Enter the new Price:\n...";
+            cin>>newprice;
+            Price[numberpro-1]=newprice;
+        }
+
+        cout<<"The Product "<<p+1<<" is Editing!\n\n";
+
+    }
+
+    cout<<"Do you want to see the menu after editing?y/o";
+    char cc;
+
+    mm:
+
+    cin>>cc;
+    if(cc=='y'||cc=='o')
+    {
+        if(cc=='y')
+        {
+            Show_menu();
+        }
+    }
+
+    else
+    {
+        cout << "Please choose y/n\n...";
+        goto mm;
+    }
+
+}
+
+void Remove()
+{
+
+    int pro[20];
+    int numproductt;
+
+    cout << "How many products would you like to remove?\n...";
+    cin >> numproductt;
+    cout << "\nChoose the product numbers you want to remove:\n\n";
+    Show_menu();
+
+    cout << "\nEnter the product number you want to remove:\n";
+    for (int p = 0; p < numproductt; p++)
+    {
+
+        cout << "...";
+        cin >> pro[p];
+
+        if (pro[p] < 1 || pro[p] > menu_size)
+        {
+            cout << "Error: The product number is out of range.\n";
+            return;
+        }
+
+    }
+
+
+    for (int p = 0; p < numproductt; p++)
+    {
+
+        int index = pro[p] - 1;
+        for (int i = index; i < menu_size - 1; i++)
+        {
+            Product[i] = Product[i + 1];
+            Price[i] = Price[i + 1];
+        }
+        menu_size--;
+
+
+        for (int k = p + 1; k < numproductt; k++)
+        {
+            if (pro[k] > pro[p]) pro[k]--;
+        }
+
+    }
+
+    cout << "The selected products have been removed successfully.\n\n";
+
+    cout << "Do you want to see the menu after editing? (y/n)\n...";
+    char cc;
+
+    mmm:
+
+    cin >> cc;
+    if (cc == 'y' || cc == 'n')
+    {
+        if (cc == 'y')
+        {
+            Show_menu();
+        }
+    }
+    else
+    {
+        cout << "Please choose y/n\n...";
+        goto mmm;
+    }
+}
